@@ -58,7 +58,7 @@ function testPromise() {
                 }
             }
         };
-        req.open('GET', 'file-1.json', true);
+        req.open('GET', 'https://raw.githubusercontent.com/marcdahan/javascript-ES6-promises-example/master/file-1.json', true);
         req.send(null);
     });
 
@@ -75,7 +75,7 @@ function testPromise() {
                 }
             }
         };
-        req.open('GET', 'file-2.json', true);
+        req.open('GET', 'https://raw.githubusercontent.com/marcdahan/javascript-ES6-promises-example/master/file-2.json', true);
         req.send(null);
     });
 
