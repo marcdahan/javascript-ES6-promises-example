@@ -1,0 +1,6 @@
+{
+    'Mercury' : {diameter: 4878, mainSatellites: null},
+    'Venus' : {diameter: 12104, mainSatellites: null}, 
+    'Earth' : {diameter: 12104, mainSatellites: ['Lune'] }, 
+    'Mars' : {diameter: 6792, mainSatellites: ['Phobos','Deimos']}
+}
