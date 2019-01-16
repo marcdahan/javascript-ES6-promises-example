@@ -1,5 +1,5 @@
-'use strict';
-var comptePromesse = 0;
+ï»¿'use strict';
+let comptePromesse = 0;
 
 function DOMCreate() {
     this.buttonNumber = 0;
@@ -8,30 +8,29 @@ function DOMCreate() {
         name = name || "Click Me";
         this.buttonNumber += 1;
         this.marginTop += 100;
-        var defaultStyles = "color:white;background: red;z-index: 100;width: 200px;padding: 10px;position:absolute;top: " + this.marginTop.toString() + "px;left: 50%;margin-left: -100px;";
-        // //title 
-        // var title = document.createElement("TITLE");
-        // title.appendChild(document.createTextNode("Test ES6"));
-        // document.body.appendChild(title);
-        // //styles
-        // styles = (styles ? defaultStyles + styles : defaultStyles);     
-        //button
-        var newButton = document.createElement("BUTTON");
+        let defaultStyles = "color: white;background: red;z-index: 100;width: 200px;padding: 10px;position: absolute;top: " + this.marginTop.toString() + "px;left: 50%;margin-left: -100px;";
+        //title 
+        let title = document.createElement("TITLE");
+        title.appendChild(document.createTextNode("Test ES6"));
+        document.head.appendChild(title);
+        //styles
+        styles = (styles ? defaultStyles + styles : defaultStyles);     
+        let newButton = document.createElement("BUTTON");
         newButton.appendChild(document.createTextNode(name));
         newButton.setAttribute("style", styles);
         newButton.setAttribute("class", className + this.buttonNumber);
         newButton.setAttribute("id", className + this.buttonNumber);
         newButton.setAttribute("type", "button");
         document.body.appendChild(newButton);
-        var buttonNumber = this.buttonNumber;
+        let buttonNumber = this.buttonNumber;
         newButton.addEventListener("click", function() {
-        if (callback) {
-            callback(className + buttonNumber);
-        }
+            if (callback) {
+                callback(className + buttonNumber);
+            }
         });
     };
-    this.createLog = function name(txt, className, styles) {
-        var log = document.createElement("DIV");
+    this.createDIVLog = function name(txt, className, styles) {
+        let log = document.createElement("DIV");
         styles = styles || "display: block;background: black;color: white;min-width: 250px;min-height: 250px;";
         log.appendChild(document.createTextNode(txt));
         log.setAttribute("style", styles);
@@ -42,50 +41,62 @@ function DOMCreate() {
 }
 
 function testPromise() {
-    var thisComptePromesse = ++comptePromesse;
-    var log = document.getElementById('log');
-    log.insertAdjacentHTML('beforeend', thisComptePromesse + ') Started (<small>Début du code synchrone</small>)<br/>');
-    var p1 = new Promise(function(resolve, reject) {
-        const req = new XMLHttpRequest();
-        req.onreadystatechange = function(event) {
-            if (req.readyState === XMLHttpRequest.DONE) {
-                if (req.status === 200) {
-                    console.log("Réponse reçue: %s", req.responseText);
-                    resolve("Réponse reçue: %s", req.responseText)
+    let comptePromesse = 0;
+    let log = document.getElementById('log');
+
+    let promise1 = new Promise(function(resolve, reject) {
+        comptePromesse++;
+        let promesseActuelle = comptePromesse;
+        let request1 = new XMLHttpRequest();
+        request1.onreadystatechange = function(event) {
+            if (request1.readyState === XMLHttpRequest.DONE) {
+                if (request1.status === 200) {
+                    log.insertAdjacentHTML('beforeend', "<br/>Promesse NÂ°" + promesseActuelle + " :  RÃ‰SOLUE (responseText): " + request1.responseText + "<br/>");
+                    resolve("rÃ©solu : " + request1.responseText);
                 } else {
-                    console.log("Status de la réponse: %d (%s)", req.status, req.statusText);
-                    reject("Status de la réponse: %d (%s)", req.status, req.statusTe);
+                    log.insertAdjacentHTML('beforeend', "<br/>Promesse NÂ°" + promesseActuelle + " : REJET (statusText): " + request1.statusText + "<br/>");
+                    reject("rejet : " + request1.status + ", " + request1.statusText);                }
+            }
+        };
+        request1.open('GET', 'https://raw.githubusercontent.com/marcdahan/javascript-ES6-promises-example/master/file-1.json', true);
+        request1.send(null);
+    });
+
+    let promise2 = new Promise(function(resolve, reject) {
+        comptePromesse++;
+        let promesseActuelle = comptePromesse;
+        let request2 = new XMLHttpRequest();
+        request2.onreadystatechange = function(event) {
+            if (request2.readyState === XMLHttpRequest.DONE) {
+                if (request2.status === 200) {
+                    log.insertAdjacentHTML('beforeend', "<br/>Promesse NÂ°" + promesseActuelle + " : RÃ‰SOLUE (responseText): " + request2.responseText + "<br/>");
+                    resolve("RÃ©ponse reÃ§ue: " + request2.responseText);
+                } else {
+                    log.insertAdjacentHTML('beforeend', "<br/>Promesse NÂ°" + promesseActuelle + " : REJET (statusText): " + request2.statusText + "<br/>");
+                    reject("rejet : Status , " + request2.status + ", " + request2.statusText);
                 }
             }
         };
-        req.open('GET', 'https://raw.githubusercontent.com/marcdahan/javascript-ES6-promises-example/master/file-1.json', true);
-        req.send(null);
+        request2.open('GET', 'https://raw.githubusercontent.com/marcdahan/javascript-ES6-promises-example/master/file-2.json', true);
+        request2.send(null);
     });
 
-    var p2 = new Promise(function(resolve, reject) {
-        const req = new XMLHttpRequest();
-        req.onreadystatechange = function(event) {
-            if (req.readyState === XMLHttpRequest.DONE) {
-                if (req.status === 200) {
-                    console.log("Réponse reçue: %s", req.responseText);
-                    resolve("Réponse reçue: %s", req.responseText)
-                } else {
-                    console.log("Status de la réponse: %d (%s)", req.status, req.statusText);
-                    reject("Status de la réponse: %d (%s)", req.status, req.statusTe);
-                }
-            }
-        };
-        req.open('GET', 'https://raw.githubusercontent.com/marcdahan/javascript-ES6-promises-example/master/file-2.json', true);
-        req.send(null);
+    Promise.race([promise1, promise2]).then((value) => {
+        console.log("race send : " + value);
+    })
+    
+    Promise.all([promise1, promise2]).then((value) => {
+        // onFulfilled
+        }, (reason) => {
+        // onRejected
+    }).catch((reason) => {
+        throw new TypeError("un problÃ¨me est survenu : " + reason);
+    }).finally(() => {
+        console.log('finally');
     });
+    
 
 
-    p1.then(function(val) {
-        log.insertAdjacentHTML('beforeend', val + ') Promise fulfilled (<small>Fin du code asynchrone</small>)<br/>');
-    }).catch(function() { 
-        console.log("promesse rompue");
-    });
-    log.insertAdjacentHTML('beforeend', thisComptePromesse + ') Promise made (<small>Fin du code synchrone</small>)<br/>');
 }
 
 function emptyTheDOM() {
@@ -95,7 +106,8 @@ function emptyTheDOM() {
         }
     }
 }
+
 emptyTheDOM();
-var dom = new DOMCreate();
+let dom = new DOMCreate();
 dom.createButton("testor", "btn-", testPromise);
-dom.createLog("ready to begin the test", "log");
+dom.createDIVLog("ready to begin the test", "log");
