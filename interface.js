@@ -11,7 +11,7 @@ function DOMCreate() {
         let defaultStyles = "color: white;background: red;z-index: 100;width: 200px;padding: 10px;position: absolute;top: " + this.marginTop.toString() + "px;left: 50%;margin-left: -100px;";
         //title 
         let title = document.createElement("TITLE");
-        title.appendChild(document.createTextNode("Test ES6"));
+        title.appendChild(document.createTextNode("javascript-ES6-promises-exampl"));
         document.head.appendChild(title);
         //styles
         styles = (styles ? defaultStyles + styles : defaultStyles);     
