@@ -1,4 +1,4 @@
-ï»¿'use strict';
+'use strict';
 let comptePromesse = 0;
 
 function DOMCreate() {
@@ -51,10 +51,10 @@ function testPromise() {
         request1.onreadystatechange = event => {
             if (request1.readyState === XMLHttpRequest.DONE) {
                 if (request1.status === 200) {
-                    log.insertAdjacentHTML('beforeend', "<br/>Promesse NÂ°" + promesseActuelle + " :  RÃ‰SOLUE (responseText): " + request1.responseText + "<br/>");
-                    resolve("rÃ©solu : " + request1.responseText);
+                    log.insertAdjacentHTML('beforeend', "<br/>Promesse N°" + promesseActuelle + " :  RÉSOLUE (responseText): " + request1.responseText + "<br/>");
+                    resolve("résolu : " + request1.responseText);
                 } else {
-                    log.insertAdjacentHTML('beforeend', "<br/>Promesse NÂ°" + promesseActuelle + " : REJET (statusText): " + request1.statusText + "<br/>");
+                    log.insertAdjacentHTML('beforeend', "<br/>Promesse N°" + promesseActuelle + " : REJET (statusText): " + request1.statusText + "<br/>");
                     reject("rejet : " + request1.status + ", " + request1.statusText);                }
             }
         };
@@ -69,10 +69,10 @@ function testPromise() {
         request2.onreadystatechange = event => {
             if (request2.readyState === XMLHttpRequest.DONE) {
                 if (request2.status === 200) {
-                    log.insertAdjacentHTML('beforeend', "<br/>Promesse NÂ°" + promesseActuelle + " : RÃ‰SOLUE (responseText): <br/>" + request2.responseText + "<br/>");
-                    resolve("RÃ©ponse reÃ§ue: " + request2.responseText);
+                    log.insertAdjacentHTML('beforeend', "<br/>Promesse N°" + promesseActuelle + " : RÉSOLUE (responseText): <br/>" + request2.responseText + "<br/>");
+                    resolve("Réponse reçue: " + request2.responseText);
                 } else {
-                    log.insertAdjacentHTML('beforeend', "<br/>Promesse NÂ°" + promesseActuelle + " : REJET (statusText): <br/>" + request2.statusText + "<br/>");
+                    log.insertAdjacentHTML('beforeend', "<br/>Promesse N°" + promesseActuelle + " : REJET (statusText): <br/>" + request2.statusText + "<br/>");
                     reject("rejet : Status , " + request2.status + ", " + request2.statusText);
                 }
             }
@@ -84,21 +84,21 @@ function testPromise() {
     Promise.race([promise1, promise2])
     .then(
         value => {
-            log.insertAdjacentHTML('beforeend', "<br/>une premiÃ¨re promesse a Ã©tÃ© tenue : " + value + "<br/><br/>");
+            log.insertAdjacentHTML('beforeend', "<br/>une première promesse a été tenue : " + value + "<br/><br/>");
         });
     
     Promise.all([promise1, promise2])
     .then(
         promiseFullfilled => {
-            log.insertAdjacentHTML('beforeend', "<br/>Toutes les promesses ont Ã©tÃ© tenues : " + promiseFullfilled + "<br/>");
+            log.insertAdjacentHTML('beforeend', "<br/>Toutes les promesses ont été tenues : " + promiseFullfilled + "<br/>");
         },
         promiseFailed => {
             log.insertAdjacentHTML('beforeend', "<br/>Le process de promesses a faillit : " + promiseFailed + "<br/>");
         })
     .catch(
         exceptionCatched => {
-        log.insertAdjacentHTML('beforeend', "<br/>une exception a Ã©tÃ© attrapÃ©e : " + exceptionCatched + "<br/>");
-        throw new TypeError("<br/>une exception a Ã©tÃ© attrapÃ©e " + reason + "<br/>");
+        log.insertAdjacentHTML('beforeend', "<br/>une exception a été attrapée : " + exceptionCatched + "<br/>");
+        throw new TypeError("<br/>une exception a été attrapée " + reason + "<br/>");
     }).finally(() => {
         log.insertAdjacentHTML('beforeend', "<br/>FIN.<br/>");
     });
@@ -118,4 +118,4 @@ const emptyTheDOM = () => {
 emptyTheDOM();
 let dom = new DOMCreate();
 dom.createButton("testor", "btn-", testPromise);
-dom.createDIVLog("prÃªt Ã  commencer le test", "log");
+dom.createDIVLog("prêt à commencer le test", "log");

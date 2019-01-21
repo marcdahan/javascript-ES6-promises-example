@@ -1,3 +1,14 @@
 {
-    "first astronauts" : ["Yuri Gagarin", "Alan Shepard", "Virgil Grissom", "Gherman Titov", "John Glenn", "Scott Carpenter", "Andriyan Nikolayev", "Pavel Popovich", "Walter Schirra", "Gordon Cooper"]
+    "first astronauts" : [
+        "Yuri Gagarin",
+        "Alan Shepard",
+        "Virgil Grissom",
+        "Gherman Titov",
+        "John Glenn",
+        "Scott Carpenter",
+        "Andriyan Nikolayev",
+        "Pavel Popovich",
+        "Walter Schirra",
+        "Gordon Cooper"
+    ]
 }
